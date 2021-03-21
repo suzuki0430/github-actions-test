@@ -4,8 +4,8 @@ on: [push] #ワークフロー実行のトリガーとなるイベント
 
 jobs: #ワークフローで実行するジョブ(複数記述可能)
   run-shell-command: #ジョブの名前
-    runs-on: ubuntu-latest #jobを実行するVMのOSを指定
-    steps: #jobの実行内容
+    runs-on: ubuntu-latest #ジョブを実行するVMのOSをlinuxに指定
+    steps: #ジョブの実行内容
       - name: echo a string
         run: echo "Hello World"
       - name: multiline script 
@@ -18,10 +18,11 @@ jobs: #ワークフローで実行するジョブ(複数記述可能)
           print(platform.processor())
         shell: python
   run-windows-commands:
-    runs-on: windows-latest
+    runs-on: windows-latest #ジョブを実行するVMのOSをwindowsに指定
+    needs: ["run-shell-command"] #run-shell-commandのジョブが成功したときだけ実行
     steps:
       - name: Directory PowerShell
-        run: Get-Location
+        run: Get-Location #winOSなのでPowerShellを実行
       - name: Directory Bash
-        run: pwd
-        shell: bash
+        run: pwd #bashのpwdコマンドを実行
+        shell: bash #shellをbashに指定
