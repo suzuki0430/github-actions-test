@@ -7,7 +7,7 @@ jobs: #ワークフローで実行するジョブ(複数記述可能)
     runs-on: ubuntu-latest #jobを実行するVMのOSを指定
     steps: #jobの実行内容
       - name: echo a string
-        run: eecho "Hello World"
+        run: echo "Hello World"
       - name: multiline script 
         run: |
           node -v 
