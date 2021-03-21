@@ -12,3 +12,8 @@ jobs: #ワークフローで実行するジョブ(複数記述可能)
         run: |
           node -v 
           npm -v
+      - name: python Command
+        run: |
+          import platform
+          print(platform.processor())
+        shell: python
