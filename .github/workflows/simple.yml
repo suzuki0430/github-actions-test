@@ -1,6 +1,6 @@
 name: Shell Commands #ワークフローの名前
 
-on: [push] #ワークフロー実行のトリガーとなるイベント
+on: [pull_request] #ワークフロー実行のトリガーとなるイベント
 
 jobs: #ワークフローで実行するジョブ(複数記述可能)
   run-shell-command: #ジョブの名前
