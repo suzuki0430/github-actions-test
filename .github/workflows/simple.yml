@@ -8,6 +8,8 @@ jobs: #ワークフローで実行するジョブ(複数記述可能)
     steps: #ジョブの実行内容
       - name: echo a string
         run: echo "Hello World"
+        # continue-on-error: true
+        # timeout-minutes: 0
       - name: multiline script 
         run: |
           node -v 
