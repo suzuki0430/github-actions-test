@@ -3,12 +3,31 @@ on: push
 
 jobs:
   node-version:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        node_version: [6, 8, 10] #3パターンのnode_version
+      # max-parallel: 2 #ジョブの最大並列実行数
+      # fail-fast: true #3つのジョブのどれかがfailだったらstop
+        include: #指定したmatrixの組合せを実行する
+          - os: ubuntu-latest
+            node_version: 8
+            is_ubuntu_8: "true" #この組合せのときだけ使用できる変数
+        exclude: #指定したmatrixの組合せを実行しない
+          - os: ubuntu-latest
+            node_version: 6
+          - os: macos-latest
+            node_version: 8
+    runs-on: ${{ matrix.os }}
+    env:
+      IS_UBUNTU_8: ${{ matrix.is_ubuntu_8 }}
     steps:
       - name: Log node version
         run: node -v
       - uses: actions/setup-node@v2 #nodeのダウンロード
         with:
-          node-version: 6
+          node-version: ${{ matrix.node_version }} #3パターンでジョブを実行
       - name: Log node version
-        run: node -v      
+        run: |
+          node -v
+          echo $IS_UBUNTU_8
