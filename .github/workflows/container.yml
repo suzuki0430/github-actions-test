@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       app:
-        build: alialaa17/node-api #既存イメージを使用
+        image: alialaa17/node-api #既存イメージを使用
         ports:
           - 3001:3000
       mongo:
